@@ -37,3 +37,7 @@ FormSubmitの activation email に記載されたランダムIDをフォーム a
 問い合わせ送信後は FormSubmit の完了ページではなく、
 `https://one-raj-devkota.github.io/devkota-lab-v2/#contact`
 へ自動的に戻るよう `_next` を設定済みです。
+
+
+## Multilingual
+日本語 / English / नेपाली の3言語切替対応。ヘッダーの JP / EN / ने で切替でき、選択言語はブラウザに保存されます。
