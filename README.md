@@ -14,13 +14,13 @@ Repository → Settings → Pages → Source を **GitHub Actions** に設定し
 
 ## Access gate
 
-- 閲覧コード: `20260914`
+- 閲覧コード: `XXXXXXXXXXXX`
 - ブラウザ側でSHA-256照合を行い、認証後は同じタブ内で再入力不要です。
 - 注意: GitHub Pagesは静的サイトのため、これは「簡易アクセス制限」です。本格的な秘匿が必要な場合はサーバー側認証が必要です。
 
 ## Contact form
 
-送信先は `ydevko98@gmail.com` に設定済みです。
+送信先は `XXXXXXXXXXXXXXXXX@gmail.com` に設定済みです。
 FormSubmitを使用するため、最初のテスト送信時に確認メールが届きます。
 その確認メール内の有効化リンクを押した後、以降の問い合わせがメールに届くようになります。
 
