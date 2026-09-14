@@ -13,34 +13,34 @@
   const copy = {
     ja: {
       nav: ['About','Skills','Projects','Experience','Contact'],
-      connect: "Let's Connect", kicker: '{t.kicker}',
+      connect: "Let's Connect", kicker: 'SYSTEM ENGINEER / WEB DEVELOPER',
       hero1: 'Build a', hero2: 'Better Tomorrow.', hello: "Hi, I'm",
-      heroDesc: '{t.heroDesc}',
+      heroDesc: 'Webシステム開発・テストの経験を土台に、技術を学び、試し、小さなアイデアを実際に動くものへ変えていく。',
       viewWork: 'View My Work', availability: '学習・新しい機会に前向き',
-      aboutLabel: '{t.aboutLabel}', aboutTitle1: 'Turning Ideas', aboutTitle2: 'into Impact.',
-      aboutLead: '{t.aboutLead}',
-      aboutBody: '{t.aboutBody}',
-      based: '日本在住', skillsLabel: '{t.skillsLabel}', skillsTitle: '{t.skillsTitle}', skillsDesc: '{t.skillsDesc}',
-      projectsLabel: '{t.projectsLabel}', projectsTitle: "{t.projectsTitle}", projectsDesc: '{t.projectsDesc}',
-      expLabel: '{t.expLabel}', journeyTitle: '{t.journeyTitle}', journeyDesc: '{t.journeyDesc}',
-      contactLabel: '{t.contactLabel}', contact1: "Let's Build", contact2: 'Something Great.', contactDesc: '{t.contactDesc}', open: '新しい機会に前向き',
-      formName: '{t.formName}', formEmail: '{t.formEmail}', form{t.formSubject}: '{t.formSubject}', form{t.formMessage}: '{t.formMessage}', namePh: 'お名前', subjectPh: 'お問い合わせ件名', messagePh: 'お問い合わせ内容', send: 'Send {t.formMessage}',
-      gateTitle1: '閲覧コードを', gateTitle2: '入力してください', gateCopy: '{t.gateCopy}', gatePh: '閲覧コード', gateNote: '{t.gateNote}', gateError: '閲覧コードが違います。もう一度確認してください。'
+      aboutLabel: 'ABOUT ME', aboutTitle1: 'Turning Ideas', aboutTitle2: 'into Impact.',
+      aboutLead: '約3年間、Webシステム開発案件に携わり、主に単体テスト・システムテストを担当してきました。',
+      aboutBody: '新規開発、既存画面の改修、管理画面実装、一部の運用保守も経験。現在はWeb開発を軸に、AI・セキュリティなど新しい分野も継続的に学んでいます。',
+      based: '日本在住', skillsLabel: 'SKILLS & TECHNOLOGIES', skillsTitle: 'Tools I Work With', skillsDesc: '実務経験と学習経験を含む技術スタック。',
+      projectsLabel: 'FEATURED PROJECTS', projectsTitle: "Things I've Built", projectsDesc: '制作物を少しずつ増やしていく場所。',
+      expLabel: 'EXPERIENCE', journeyTitle: 'My Journey', journeyDesc: '経験と学習を、次の挑戦へつなげる。',
+      contactLabel: 'CONTACT', contact1: "Let's Build", contact2: 'Something Great.', contactDesc: '仕事・技術・制作物についてのご連絡はこちらから。', open: '新しい機会に前向き',
+      formName: 'Your Name', formEmail: 'Your Email', formSubject: 'Subject', formMessage: 'Message', namePh: 'お名前', subjectPh: 'お問い合わせ件名', messagePh: 'お問い合わせ内容', send: 'Send Message',
+      gateTitle1: '閲覧コードを', gateTitle2: '入力してください', gateCopy: 'このページは現在プレビュー公開中です。許可された方のみ閲覧できます。', gatePh: '閲覧コード', gateNote: 'コード確認後、このブラウザタブでは再入力不要です。', gateError: '閲覧コードが違います。もう一度確認してください。'
     },
     en: {
       nav: ['About','Skills','Projects','Experience','Contact'],
-      connect: "Let's Connect", kicker: '{t.kicker}',
+      connect: "Let's Connect", kicker: 'SYSTEM ENGINEER / WEB DEVELOPER',
       hero1: 'Build a', hero2: 'Better Tomorrow.', hello: "Hi, I'm",
       heroDesc: 'I build on my experience in web systems and software testing to learn, experiment, and turn small ideas into working products.',
-      viewWork: 'View My Work', availability: '{t.availability}',
-      aboutLabel: '{t.aboutLabel}', aboutTitle1: 'Turning Ideas', aboutTitle2: 'into Impact.',
+      viewWork: 'View My Work', availability: 'Open to learning & new opportunities',
+      aboutLabel: 'ABOUT ME', aboutTitle1: 'Turning Ideas', aboutTitle2: 'into Impact.',
       aboutLead: 'I have around three years of experience in web system development projects, mainly working on unit testing and system testing.',
       aboutBody: 'I have also worked on new development, existing-screen modifications, admin interfaces, and some maintenance work. I am now expanding my skills in web development, AI, and security.',
-      based: '{t.based}', skillsLabel: '{t.skillsLabel}', skillsTitle: '{t.skillsTitle}', skillsDesc: 'A technology stack combining hands-on experience and ongoing learning.',
-      projectsLabel: '{t.projectsLabel}', projectsTitle: "{t.projectsTitle}", projectsDesc: 'A growing collection of projects and ideas.',
-      expLabel: '{t.expLabel}', journeyTitle: '{t.journeyTitle}', journeyDesc: 'Turning experience and learning into the next challenge.',
-      contactLabel: '{t.contactLabel}', contact1: "Let's Build", contact2: 'Something Great.', contactDesc: 'Feel free to contact me about work, technology, or projects.', open: '{t.open}',
-      formName: '{t.formName}', formEmail: '{t.formEmail}', form{t.formSubject}: '{t.formSubject}', form{t.formMessage}: '{t.formMessage}', namePh: 'Your name', subjectPh: '{t.formSubject}', messagePh: 'Your message', send: 'Send {t.formMessage}',
+      based: 'Based in Japan', skillsLabel: 'SKILLS & TECHNOLOGIES', skillsTitle: 'Tools I Work With', skillsDesc: 'A technology stack combining hands-on experience and ongoing learning.',
+      projectsLabel: 'FEATURED PROJECTS', projectsTitle: "Things I've Built", projectsDesc: 'A growing collection of projects and ideas.',
+      expLabel: 'EXPERIENCE', journeyTitle: 'My Journey', journeyDesc: 'Turning experience and learning into the next challenge.',
+      contactLabel: 'CONTACT', contact1: "Let's Build", contact2: 'Something Great.', contactDesc: 'Feel free to contact me about work, technology, or projects.', open: 'Open to opportunities',
+      formName: 'Your Name', formEmail: 'Your Email', formSubject: 'Subject', formMessage: 'Message', namePh: 'Your name', subjectPh: 'Subject', messagePh: 'Your message', send: 'Send Message',
       gateTitle1: 'Enter the', gateTitle2: 'access code', gateCopy: 'This page is currently a private preview. Only authorized viewers may continue.', gatePh: 'Access code', gateNote: 'After verification, you will not need to re-enter the code in this browser tab.', gateError: 'The access code is incorrect. Please try again.'
     },
     ne: {
@@ -56,7 +56,7 @@
       projectsLabel: 'मुख्य परियोजनाहरू', projectsTitle: 'मैले बनाएका कामहरू', projectsDesc: 'बिस्तारै थपिँदै जाने परियोजना र विचारहरूको संग्रह।',
       expLabel: 'अनुभव', journeyTitle: 'मेरो यात्रा', journeyDesc: 'अनुभव र सिकाइलाई अर्को चुनौतीसँग जोड्दै।',
       contactLabel: 'सम्पर्क', contact1: 'सँगै बनाऔँ', contact2: 'केही उत्कृष्ट।', contactDesc: 'काम, प्रविधि वा परियोजनासम्बन्धी सम्पर्कका लागि यहाँबाट सन्देश पठाउन सक्नुहुन्छ।', open: 'नयाँ अवसरका लागि खुला',
-      formName: 'तपाईंको नाम', formEmail: 'तपाईंको इमेल', form{t.formSubject}: 'विषय', form{t.formMessage}: 'सन्देश', namePh: 'तपाईंको नाम', subjectPh: 'सम्पर्कको विषय', messagePh: 'तपाईंको सन्देश', send: 'सन्देश पठाउनुहोस्',
+      formName: 'तपाईंको नाम', formEmail: 'तपाईंको इमेल', formSubject: 'विषय', formMessage: 'सन्देश', namePh: 'तपाईंको नाम', subjectPh: 'सम्पर्कको विषय', messagePh: 'तपाईंको सन्देश', send: 'सन्देश पठाउनुहोस्',
       gateTitle1: 'हेर्नको लागि', gateTitle2: 'कोड प्रविष्ट गर्नुहोस्', gateCopy: 'यो पृष्ठ हाल निजी पूर्वावलोकनमा छ। अनुमति प्राप्त व्यक्तिले मात्र हेर्न सक्छन्।', gatePh: 'हेर्ने कोड', gateNote: 'कोड सही भएपछि यही ब्राउजर ट्याबमा फेरि कोड हाल्नु पर्दैन।', gateError: 'हेर्ने कोड गलत छ। कृपया फेरि प्रयास गर्नुहोस्।'
     }
   } as const;
