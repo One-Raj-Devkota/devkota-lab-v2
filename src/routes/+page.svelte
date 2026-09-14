@@ -149,7 +149,7 @@
     };
   });
 
-  const contactEndpoint = 'https://formsubmit.co/ydevko98@gmail.com';
+  const contactEndpoint = 'https://formsubmit.co/e28273ca99a63d589b72cce73219cf47';
 </script>
 
 <svelte:head>
@@ -342,16 +342,17 @@
       </div>
       <form class="contact-form glass reveal" action={contactEndpoint} method="POST">
         <div class="form-row">
-          <label>Your Name<input required name="name" placeholder="お名前" /></label>
+          <label>Your Name<input required name="お名前" placeholder="お名前" /></label>
           <label>Your Email<input required type="email" name="email" placeholder="you@example.com" /></label>
         </div>
-        <label>Subject<input required name="subject" placeholder="お問い合わせ件名" /></label>
-        <label>Message<textarea required name="message" rows="6" placeholder="お問い合わせ内容"></textarea></label>
-        <input type="hidden" name="_subject" value="Devkota Lab Website Contact" />
+        <label>Subject<input required name="件名" placeholder="お問い合わせ件名" /></label>
+        <label>Message<textarea required name="お問い合わせ内容" rows="6" placeholder="お問い合わせ内容"></textarea></label>
+        <input type="hidden" name="_subject" value="【Devkota Lab】Webサイトからお問い合わせ" />
         <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_next" value="https://one-raj-devkota.github.io/devkota-lab-v2/#contact" />
         <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off" />
         <button class="connect" type="submit">Send Message <span>→</span></button>
-        <p class="form-note">送信内容は Devkota Lab 管理者のメールへ届きます。</p>
+        <p class="form-note">送信内容は Devkota Lab 管理者のメールへ届きます。返信は入力されたメールアドレス宛に行えます。</p>
       </form>
     </div>
   </section>

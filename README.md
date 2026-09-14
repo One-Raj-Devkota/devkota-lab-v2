@@ -23,3 +23,17 @@ Repository → Settings → Pages → Source を **GitHub Actions** に設定し
 送信先は `ydevko98@gmail.com` に設定済みです。
 FormSubmitを使用するため、最初のテスト送信時に確認メールが届きます。
 その確認メール内の有効化リンクを押した後、以降の問い合わせがメールに届くようになります。
+
+
+## Mail v2
+
+FormSubmitの activation email に記載されたランダムIDをフォーム action に使用するよう変更しました。
+メール件名は `【Devkota Lab】Webサイトからお問い合わせ`、本文は table 形式で
+「お名前 / email / 件名 / お問い合わせ内容」が見やすく表示されます。
+
+
+## Redirect after submit
+
+問い合わせ送信後は FormSubmit の完了ページではなく、
+`https://one-raj-devkota.github.io/devkota-lab-v2/#contact`
+へ自動的に戻るよう `_next` を設定済みです。
