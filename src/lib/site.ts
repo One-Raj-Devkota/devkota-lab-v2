@@ -4,8 +4,7 @@ export const site = {
   role: 'System Engineer / Web Developer',
   location: 'Japan',
   github: 'https://github.com/One-Raj-Devkota',
-  email: 'YOUR_PUBLIC_EMAIL@example.com',
-  formspreeEndpoint: 'https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID'
+  email: 'ydevko98@gmail.com',
 };
 
 export const skills = [

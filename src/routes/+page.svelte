@@ -8,7 +8,38 @@
   let scrollProgress = 0;
   let navOpen = false;
 
+  let accessGranted = false;
+  let accessCode = '';
+  let accessError = '';
+  const ACCESS_HASH = '1b5cb42bd23a245885647784267edec165dff569b3ad99e7cab8671c51f3f54a';
+
+  async function sha256(value: string) {
+    const bytes = new TextEncoder().encode(value);
+    const digest = await crypto.subtle.digest('SHA-256', bytes);
+    return Array.from(new Uint8Array(digest))
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  async function unlockSite() {
+    accessError = '';
+    const hash = await sha256(accessCode.trim());
+
+    if (hash === ACCESS_HASH) {
+      accessGranted = true;
+      sessionStorage.setItem('devkota-lab-access', 'granted');
+      document.body.style.overflow = '';
+      accessCode = '';
+      return;
+    }
+
+    accessError = '閲覧コードが違います。もう一度確認してください。';
+  }
+
   onMount(() => {
+    accessGranted = sessionStorage.getItem('devkota-lab-access') === 'granted';
+    if (!accessGranted) document.body.style.overflow = 'hidden';
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -118,13 +149,49 @@
     };
   });
 
-  const formReady = !site.formspreeEndpoint.includes('REPLACE_WITH_YOUR_FORM_ID');
+  const contactEndpoint = 'https://formsubmit.co/ydevko98@gmail.com';
 </script>
 
 <svelte:head>
   <title>{site.brand} | {site.name}</title>
   <meta name="description" content="One-Raj Devkotaの個人ポートフォリオ。Web開発、Software Testing、学習・制作物を紹介しています。" />
 </svelte:head>
+
+{#if !accessGranted}
+  <div class="access-gate" role="dialog" aria-modal="true" aria-labelledby="access-title">
+    <div class="gate-orb gate-orb-a"></div>
+    <div class="gate-orb gate-orb-b"></div>
+
+    <form class="access-card" onsubmit={(event) => { event.preventDefault(); unlockSite(); }}>
+      <div class="gate-logo"><span></span></div>
+      <p class="gate-kicker">DEVKOTA LAB · PRIVATE PREVIEW</p>
+      <h1 id="access-title">閲覧コードを<br /><span>入力してください</span></h1>
+      <p class="gate-copy">
+        このページは現在プレビュー公開中です。許可された方のみ閲覧できます。
+      </p>
+
+      <label for="access-code">ACCESS CODE</label>
+      <div class="gate-input-row">
+        <input
+          id="access-code"
+          type="password"
+          inputmode="numeric"
+          autocomplete="off"
+          placeholder="閲覧コード"
+          bind:value={accessCode}
+          autofocus
+        />
+        <button type="submit">ENTER <span>→</span></button>
+      </div>
+
+      {#if accessError}
+        <p class="gate-error">{accessError}</p>
+      {/if}
+
+      <p class="gate-note">コード確認後、このブラウザタブでは再入力不要です。</p>
+    </form>
+  </div>
+{/if}
 
 <canvas class="stars" bind:this={canvas} aria-hidden="true"></canvas>
 <div class="noise" aria-hidden="true"></div>
@@ -273,7 +340,7 @@
           <div><i>GH</i><a href={site.github} target="_blank" rel="noreferrer">GitHub Profile</a></div>
         </div>
       </div>
-      <form class="contact-form glass reveal" action={formReady ? site.formspreeEndpoint : undefined} method="POST">
+      <form class="contact-form glass reveal" action={contactEndpoint} method="POST">
         <div class="form-row">
           <label>Your Name<input required name="name" placeholder="お名前" /></label>
           <label>Your Email<input required type="email" name="email" placeholder="you@example.com" /></label>
@@ -281,8 +348,10 @@
         <label>Subject<input required name="subject" placeholder="お問い合わせ件名" /></label>
         <label>Message<textarea required name="message" rows="6" placeholder="お問い合わせ内容"></textarea></label>
         <input type="hidden" name="_subject" value="Devkota Lab Website Contact" />
-        <button class="connect" disabled={!formReady}>{formReady ? 'Send Message' : 'Formspree IDを設定すると送信可能'} <span>→</span></button>
-        {#if !formReady}<p class="form-note">公開前に <code>src/lib/site.ts</code> の <code>formspreeEndpoint</code> を設定してください。</p>{/if}
+        <input type="hidden" name="_template" value="table" />
+        <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off" />
+        <button class="connect" type="submit">Send Message <span>→</span></button>
+        <p class="form-note">送信内容は Devkota Lab 管理者のメールへ届きます。</p>
       </form>
     </div>
   </section>
@@ -296,6 +365,14 @@
 
 <style>
 :global(*){box-sizing:border-box}:global(html){scroll-behavior:smooth;background:#070912;--mx:50vw;--my:30vh}:global(body){margin:0;min-width:320px;color:#f7f8ff;background:radial-gradient(circle at 72% 4%,rgba(23,74,170,.24),transparent 28rem),radial-gradient(circle at 9% 33%,rgba(137,52,255,.13),transparent 27rem),#070912;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}:global(a){color:inherit;text-decoration:none}:global(button),:global(input),:global(textarea){font:inherit}:global(::selection){background:#8e5cff;color:white}
+.access-gate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px;overflow:hidden;background:radial-gradient(circle at 50% 15%,rgba(32,102,255,.22),transparent 34rem),radial-gradient(circle at 12% 75%,rgba(161,50,255,.18),transparent 30rem),#050711}
+.access-gate:before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 12% 18%,rgba(255,255,255,.9) 0 1px,transparent 1.5px),radial-gradient(circle at 72% 24%,rgba(127,218,255,.9) 0 1px,transparent 1.5px),radial-gradient(circle at 44% 78%,rgba(203,146,255,.8) 0 1px,transparent 1.5px);background-size:97px 101px,143px 137px,181px 173px;opacity:.28;animation:gateStars 10s linear infinite}
+.gate-orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35}.gate-orb-a{width:24rem;height:24rem;background:#1676ff;right:-7rem;top:-8rem}.gate-orb-b{width:21rem;height:21rem;background:#b02dff;left:-7rem;bottom:-7rem}
+.access-card{position:relative;width:min(560px,100%);padding:42px;border:1px solid rgba(137,172,255,.22);border-radius:24px;background:linear-gradient(145deg,rgba(13,20,45,.9),rgba(8,10,24,.83));backdrop-filter:blur(28px) saturate(145%);box-shadow:0 30px 100px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.04)}
+.gate-logo{width:54px;height:54px;border:1px solid rgba(111,200,255,.35);border-radius:16px;display:grid;place-items:center;margin-bottom:25px;background:linear-gradient(145deg,rgba(45,139,255,.18),rgba(164,69,255,.16));box-shadow:0 0 28px rgba(77,132,255,.12)}
+.gate-logo span{width:11px;height:11px;border-radius:50%;background:#8cecff;box-shadow:0 0 8px #8cecff,0 0 25px #6f6dff;position:relative}.gate-logo span:before,.gate-logo span:after{content:"";position:absolute;left:50%;top:50%;width:33px;height:12px;border:1px solid rgba(113,196,255,.75);border-radius:50%;transform:translate(-50%,-50%) rotate(25deg)}.gate-logo span:after{transform:translate(-50%,-50%) rotate(-38deg);border-color:rgba(225,89,255,.6)}
+.gate-kicker{font-size:10px;letter-spacing:.21em;color:#7485aa;margin:0 0 10px}.access-card h1{font-size:clamp(37px,7vw,58px);line-height:.98;letter-spacing:-.055em;margin:0 0 18px}.access-card h1 span{color:transparent;background:linear-gradient(90deg,#4de5ff,#8f72ff,#ff4aca);background-clip:text;-webkit-background-clip:text}.gate-copy{color:#8997b7;line-height:1.75;font-size:13px;margin:0 0 28px}.access-card label{display:block;font-size:9px;color:#7786a6;letter-spacing:.17em;margin-bottom:8px}.gate-input-row{display:grid;grid-template-columns:1fr auto;gap:9px}.gate-input-row input{min-width:0;border:1px solid rgba(118,160,241,.22);background:#09142d;color:#fff;border-radius:12px;padding:14px 15px;outline:none;letter-spacing:.15em}.gate-input-row input:focus{border-color:rgba(93,215,255,.65);box-shadow:0 0 0 3px rgba(63,144,255,.09),0 0 30px rgba(89,92,255,.12)}.gate-input-row button{border:0;border-radius:12px;padding:0 20px;color:white;font-size:11px;font-weight:800;background:linear-gradient(100deg,#2499ff,#7768ff 48%,#f14bcf);box-shadow:0 0 25px rgba(89,90,255,.22);cursor:pointer}.gate-input-row button span{margin-left:10px}.gate-error{color:#ff8fa8;font-size:11px;margin:11px 0 0}.gate-note{color:#586782;font-size:9px;margin:14px 0 0}.honeypot{display:none!important}
+@keyframes gateStars{from{transform:translateY(0)}to{transform:translateY(-20px)}}
 .stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}.cursor-glow{position:fixed;left:var(--mx);top:var(--my);width:34rem;height:34rem;z-index:0;transform:translate(-50%,-50%);pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(69,156,255,.12),rgba(152,77,255,.06) 35%,transparent 67%);filter:blur(12px)}.scroll-line{position:fixed;top:0;left:0;width:100%;height:2px;z-index:100;transform-origin:left;background:linear-gradient(90deg,#36d8ff,#7857ff,#ff48cf);box-shadow:0 0 14px rgba(121,85,255,.8)}
 .nav-wrap{position:fixed;z-index:50;left:50%;top:18px;transform:translateX(-50%);width:min(1180px,calc(100% - 38px));display:flex;align-items:center;justify-content:space-between;padding:12px 15px 12px 12px;border:1px solid rgba(155,183,255,.12);border-radius:18px;background:rgba(7,10,22,.56);backdrop-filter:blur(24px) saturate(150%);box-shadow:0 18px 70px rgba(0,0,0,.18)}.brand{display:flex;align-items:center;gap:11px}.brand-orbit{width:38px;height:38px;border:1px solid rgba(128,183,255,.27);border-radius:12px;display:grid;place-items:center;position:relative;background:linear-gradient(145deg,rgba(42,125,255,.16),rgba(164,78,255,.15))}.brand-orbit:before,.brand-orbit:after{content:"";position:absolute;border:1px solid rgba(101,196,255,.65);border-radius:50%;width:21px;height:8px;transform:rotate(24deg)}.brand-orbit:after{transform:rotate(-34deg);border-color:rgba(231,86,255,.5)}.brand-orbit i{width:4px;height:4px;border-radius:50%;background:#a8eaff;box-shadow:0 0 13px #59dfff}.brand b{display:block;font-size:14px;letter-spacing:.02em}.brand em{font-style:normal;color:#a685ff}.brand small{display:block;margin-top:1px;color:#65738f;font-size:8px;letter-spacing:.17em}nav{display:flex;align-items:center;gap:23px;font-size:12px;color:#c7cce0}nav a:not(.connect){transition:.25s ease}nav a:not(.connect):hover{color:white;text-shadow:0 0 12px rgba(132,181,255,.7)}.menu{display:none}
 main,footer{position:relative;z-index:2}.hero{min-height:100svh;padding:152px max(5vw,calc((100vw - 1180px)/2)) 60px;position:relative;display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:4vw;overflow:hidden}.hero-grid{position:absolute;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(92,142,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(92,142,255,.18) 1px,transparent 1px);background-size:58px 58px;mask-image:radial-gradient(circle at 63% 44%,black 0,transparent 67%)}.aurora{position:absolute;border-radius:50%;filter:blur(70px);opacity:.2;pointer-events:none}.aurora-a{width:38rem;height:14rem;right:-8rem;top:10rem;background:#256cff;transform:rotate(-22deg)}.aurora-b{width:28rem;height:12rem;left:-10rem;bottom:5rem;background:#b029ff;transform:rotate(22deg)}
